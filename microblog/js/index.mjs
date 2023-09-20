@@ -4,12 +4,12 @@ document
     // prevent from refreshing the page on submit
     e.preventDefault();
     // read form elements
-    username = document.getElementById("post_name").value;
-    content = document.getElementById("post_content").value;
+    const username = document.getElementById("post_name").value;
+    const content = document.getElementById("post_content").value;
     // clean form
     document.getElementById("create_message_form").reset();
     // create a new message element
-    elmt = document.createElement("div");
+    const elmt = document.createElement("div");
     elmt.className = "message";
     elmt.innerHTML = `
         <div class="message_user">
@@ -21,6 +21,26 @@ document
         <div class="downvote-icon icon">0</div>
         <div class="delete-icon icon"></div>
     `;
+
+    // add an event listener for the upvote icon
+    const upvote = elmt.querySelector(".upvote-icon");
+    upvote.addEventListener("click", () => {
+      upvote.textContent = parseInt(upvote.textContent) + 1;
+    });
+
+    // add an event listener for the downvote icon
+    const downvote = elmt.querySelector(".downvote-icon");
+    downvote.addEventListener("click", () => {
+      downvote.textContent = parseInt(downvote.textContent) + 1;
+    });
+
+    // add an event listener for the delete icon
+    const del = elmt.querySelector(".delete-icon");
+    del.addEventListener("click", () => {
+      elmt.remove();
+    });
+
     // add this element to the document
     document.getElementById("messages").prepend(elmt);
+    
   });
